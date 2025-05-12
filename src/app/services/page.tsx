@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Services() {
   return (
     <div className="min-h-screen py-16">
@@ -25,8 +27,8 @@ export default function Services() {
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-xl font-medium mb-4">Pourquoi rénover ?</h3>
                 <p className="text-gray-600">
-                  La rénovation intérieure permet d'optimiser votre espace de vie,
-                  d'améliorer le confort thermique et acoustique, et d'augmenter la
+                  La rénovation intérieure permet d&apos;optimiser votre espace de vie,
+                  d&apos;améliorer le confort thermique et acoustique, et d&apos;augmenter la
                   valeur de votre bien. Nos experts vous accompagnent dans chaque
                   étape de votre projet.
                 </p>
@@ -42,7 +44,7 @@ export default function Services() {
                 <h3 className="text-xl font-medium mb-4">Nos prestations incluent :</h3>
                 <ul className="space-y-2 text-gray-600">
                   <li>• Ravalement de façade</li>
-                  <li>• Isolation thermique par l'extérieur</li>
+                  <li>• Isolation thermique par l&apos;extérieur</li>
                   <li>• Réfection de toiture</li>
                   <li>• Pose de gouttières</li>
                   <li>• Installation de fenêtres et portes</li>
@@ -68,7 +70,7 @@ export default function Services() {
               <div>
                 <h3 className="text-xl font-medium mb-4">Nos prestations incluent :</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Optimisation d'espace</li>
+                  <li>• Optimisation d&apos;espace</li>
                   <li>• Création de mezzanines</li>
                   <li>• Aménagement de combles</li>
                   <li>• Installation de dressing</li>
@@ -81,7 +83,7 @@ export default function Services() {
                 <p className="text-gray-600">
                   Nous créons des espaces fonctionnels et esthétiques adaptés à
                   vos besoins. Notre équipe vous conseille sur les meilleures
-                  solutions d'aménagement pour optimiser chaque mètre carré.
+                  solutions d&apos;aménagement pour optimiser chaque mètre carré.
                 </p>
               </div>
             </div>
@@ -96,12 +98,12 @@ export default function Services() {
           <p className="text-gray-600 mb-8">
             Contactez-nous pour un devis gratuit et personnalisé
           </p>
-          <a
+          <Link
             href="/contact"
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
           >
             Demander un devis
-          </a>
+          </Link>
         </div>
       </div>
     </div>
