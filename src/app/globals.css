@@ -3,26 +3,59 @@
 @tailwind utilities;
 
 :root {
+  --primary: #ff6b00;
+  --primary-dark: #cc5500;
+  --secondary: #2c3e50;
+  --accent: #e67e22;
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --foreground: #1a1a1a;
+  --gray-light: #f5f6f7;
+  --gray-medium: #94a3b8;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1a1a;
+    --foreground: #ffffff;
+    --gray-light: #2a2a2a;
+    --gray-medium: #666666;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Styles personnalisés pour le secteur BTP */
+.section-title {
+  @apply text-4xl font-bold mb-8;
+  color: var(--secondary);
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-lg p-6 transition-transform duration-300 hover:scale-105;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg 
+         hover:bg-orange-700 transition-all duration-300 
+         transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-gray-100 text-gray-800 font-semibold rounded-lg 
+         hover:bg-gray-200 transition-all duration-300 
+         border border-gray-300;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
 }

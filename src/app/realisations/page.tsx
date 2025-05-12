@@ -8,33 +8,48 @@ type Project = {
   title: string;
   category: string;
   description: string;
-  imagePath: string;
+  videoPath: string;
 };
 
-// Ces données seront à remplacer par vos vraies réalisations
 const projects: Project[] = [
   {
     id: 1,
-    title: "Rénovation complète d'un appartement haussmannien",
+    title: "Rénovation complète d'intérieur",
     category: "renovation_interieure",
-    description: "Rénovation totale d'un appartement de 120m² incluant la réfection des murs, sols, plafonds, électricité et plomberie.",
-    imagePath: "/images/projects/project1.jpg"
+    description: "Transformation totale d'un espace intérieur avec des finitions haut de gamme, incluant peinture, carrelage, et aménagements sur mesure.",
+    videoPath: "/video-interieur.MP4"
   },
   {
     id: 2,
-    title: "Ravalement de façade historique",
+    title: "Rénovation de façade",
     category: "renovation_exterieure",
-    description: "Restauration complète de la façade d'un immeuble du 19ème siècle, incluant reprise des moulures et isolation thermique.",
-    imagePath: "/images/projects/project2.jpg"
+    description: "Ravalement complet de façade avec traitement des surfaces et mise en valeur du patrimoine architectural.",
+    videoPath: "/video-exterieur.MP4"
   },
   {
     id: 3,
-    title: "Création d'une suite parentale",
-    category: "amenagement",
-    description: "Aménagement d'une suite parentale avec dressing et salle de bain privative dans les combles.",
-    imagePath: "/images/projects/project3.jpg"
+    title: "Rénovation d'ouvrage d'art",
+    category: "renovation_exterieure",
+    description: "Restauration et rénovation d'un pont historique, démontrant notre expertise en travaux de grande envergure.",
+    videoPath: "/video-exterieur-pont.MP4"
   }
 ];
+
+const ProjectMedia = ({ project }: { project: Project }) => {
+  return (
+    <div className="relative h-96 bg-gray-900">
+      <video 
+        className="w-full h-full object-cover"
+        controls
+        preload="metadata"
+        poster="/images/video-thumbnail.jpg"
+      >
+        <source src={project.videoPath} type="video/mp4" />
+        Votre navigateur ne supporte pas la lecture de vidéos.
+      </video>
+    </div>
+  );
+};
 
 export default function Realisations() {
   const [filter, setFilter] = useState('all');
@@ -44,29 +59,35 @@ export default function Realisations() {
     : projects.filter(project => project.category === filter);
 
   const getButtonClass = (buttonFilter: string) => {
-    const base = "px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 focus:ring-blue-500 focus:border-blue-500";
-    const active = filter === buttonFilter ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50";
+    const base = "px-6 py-3 text-base font-medium transition-all duration-200";
+    const active = filter === buttonFilter 
+      ? "bg-orange-600 text-white shadow-lg" 
+      : "bg-white text-gray-800 hover:bg-orange-50";
     
-    let border = "";
+    let border = "border border-gray-300";
     if (buttonFilter === 'all') {
-      border = "border border-gray-300 rounded-l-lg";
-    } else if (buttonFilter === 'amenagement') {
-      border = "border border-gray-300 rounded-r-lg";
-    } else {
-      border = "border-t border-b border-gray-300";
+      border += " rounded-l-lg";
+    } else if (buttonFilter === 'renovation_exterieure') {
+      border += " rounded-r-lg";
     }
 
     return `${base} ${active} ${border}`;
   };
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-12">Nos Réalisations</h1>
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold mb-4 text-gray-900">Nos Réalisations</h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Découvrez nos travaux de rénovation à travers ces vidéos de chantiers. 
+            Chaque projet illustre notre engagement pour la qualité et notre expertise technique.
+          </p>
+        </div>
 
         {/* Filtres */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-md shadow-sm">
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex shadow-md">
             <button
               onClick={() => setFilter('all')}
               className={getButtonClass('all')}
@@ -85,60 +106,48 @@ export default function Realisations() {
             >
               Rénovation Extérieure
             </button>
-            <button
-              onClick={() => setFilter('amenagement')}
-              className={getButtonClass('amenagement')}
-            >
-              Aménagement
-            </button>
           </div>
         </div>
 
         {/* Grille des projets */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-12">
           {filteredProjects.map((project) => (
-            <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <div className="relative h-64">
-                <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                  <p className="text-gray-500">Image à venir</p>
-                </div>
-                {/* Décommentez cette partie une fois que vous aurez ajouté vos images
-                <Image
-                  src={project.imagePath}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-                */}
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <a
+            <div key={project.id} className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
+              <ProjectMedia project={project} />
+              <div className="p-8">
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">{project.title}</h3>
+                <p className="text-gray-600 text-lg mb-6">{project.description}</p>
+                <Link
                   href="/contact"
-                  className="text-blue-600 hover:text-blue-700 font-medium"
+                  className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors"
                 >
-                  Demander un projet similaire →
-                </a>
+                  Demander un devis pour un projet similaire
+                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
               </div>
             </div>
           ))}
         </div>
 
         {/* Call to Action */}
-        <div className="mt-16 text-center">
-          <h2 className="text-2xl font-semibold mb-4">
-            Vous avez un projet similaire ?
+        <div className="mt-20 text-center bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-12 shadow-xl">
+          <h2 className="text-3xl font-bold mb-4 text-white">
+            Vous avez un projet de rénovation en tête ?
           </h2>
-          <p className="text-gray-600 mb-8">
-            Contactez-nous pour discuter de votre projet de rénovation
+          <p className="text-xl text-orange-50 mb-8">
+            Contactez-nous pour une étude personnalisée de votre projet
           </p>
-          <a
+          <Link
             href="/contact"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors inline-block"
+            className="inline-flex items-center px-8 py-4 bg-white text-orange-600 text-lg font-bold rounded-lg hover:bg-orange-50 transition-colors shadow-lg"
           >
-            Demander un devis
-          </a>
+            Obtenir un devis gratuit
+            <svg className="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </div>
