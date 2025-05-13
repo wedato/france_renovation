@@ -53,15 +53,15 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-12">Contactez-nous</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-gray-900">Contactez-nous</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Informations de contact */}
           <div>
-            <div className="bg-gray-50 p-8 rounded-lg">
-              <h2 className="text-2xl font-semibold mb-6">Nos coordonnées</h2>
+            <div className="bg-gray-50 p-8 rounded-lg shadow-sm">
+              <h2 className="text-2xl font-semibold mb-6 text-gray-900">Nos coordonnées</h2>
               
               <div className="space-y-6">
                 <div>
