@@ -1,52 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-[90vh] w-full">
-        <div className="absolute inset-0">
-          <video 
-            className="w-full h-full object-cover"
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-          >
-            <source src="/video-interieur.MP4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-black/50" />
-        </div>
-        
-        <div className="relative h-full flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-                Donnez vie à vos projets de rénovation
-              </h1>
-              <p className="text-xl text-gray-200 mb-8">
-                Depuis 2018, France Rénovation 45 transforme vos espaces avec expertise et passion.
-                Plus de 20 ans d'expérience dans le BTP à votre service.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  href="/contact"
-                  className="bg-construction-600 hover:bg-construction-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
-                >
-                  Demander un devis gratuit
-                </Link>
-                <Link
-                  href="/realisations"
-                  className="bg-white hover:bg-gray-100 text-construction-800 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl"
-                >
-                  Voir nos réalisations
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Carousel */}
+      <HeroCarousel />
 
       {/* Section Services */}
       <section className="py-20 bg-gray-50">

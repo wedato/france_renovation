@@ -11,11 +11,37 @@ export default function Contact() {
     message: '',
   });
 
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Ici, vous pourrez ajouter la logique d'envoi du formulaire
-    console.log('Formulaire soumis:', formData);
-    alert('Merci pour votre message ! Nous vous contacterons rapidement.');
+    setStatus('loading');
+
+    try {
+      const response = await fetch('/api/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l&apos;envoi du message');
+      }
+
+      setStatus('success');
+      setFormData({
+        nom: '',
+        email: '',
+        telephone: '',
+        type_projet: 'renovation_interieure',
+        message: '',
+      });
+    } catch (error) {
+      setStatus('error');
+      console.error('Erreur:', error);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -41,20 +67,20 @@ export default function Contact() {
                 <div>
                   <h3 className="text-lg font-medium mb-2">Adresse</h3>
                   <p className="text-gray-600">
-                    123 Rue de la Rénovation<br />
-                    75000 Paris<br />
-                    France
+                    181 AVENUE DE VERDUN<br />
+                    BATIMENT B - RESIDENCE LES CEDRES<br />
+                    83340 LE CANNET-DES-MAURES
                   </p>
                 </div>
 
                 <div>
                   <h3 className="text-lg font-medium mb-2">Téléphone</h3>
-                  <p className="text-gray-600">01 23 45 67 89</p>
+                  <p className="text-gray-600">06 41 39 28 34</p>
                 </div>
 
                 <div>
                   <h3 className="text-lg font-medium mb-2">Email</h3>
-                  <p className="text-gray-600">contact@francerenovation.fr</p>
+                  <p className="text-gray-600">renovationfrance45@gmail.com</p>
                 </div>
 
                 <div>
@@ -152,10 +178,27 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                disabled={status === 'loading'}
+                className={`w-full px-6 py-3 rounded-lg font-semibold transition-colors ${
+                  status === 'loading'
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-orange-600 hover:bg-orange-700 text-white'
+                }`}
               >
-                Envoyer le message
+                {status === 'loading' ? 'Envoi en cours...' : 'Envoyer le message'}
               </button>
+
+              {status === 'success' && (
+                <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                  Votre message a été envoyé avec succès ! Nous vous contacterons rapidement.
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="mt-4 p-4 bg-red-100 text-red-700 rounded-lg">
+                  Une erreur est survenue lors de l&apos;envoi du message. Veuillez réessayer.
+                </div>
+              )}
             </form>
           </div>
         </div>

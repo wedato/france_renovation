@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Project = {
   id: number;
@@ -9,6 +10,14 @@ type Project = {
   category: string;
   description: string;
   videoPath: string;
+  thumbnailPath: string;
+};
+
+type ImageProject = {
+  id: number;
+  title: string;
+  category: string;
+  imagePath: string;
 };
 
 const projects: Project[] = [
@@ -17,21 +26,63 @@ const projects: Project[] = [
     title: "Rénovation complète d'intérieur",
     category: "renovation_interieure",
     description: "Transformation totale d'un espace intérieur avec des finitions haut de gamme, incluant peinture, carrelage, et aménagements sur mesure.",
-    videoPath: "/video-interieur.MP4"
+    videoPath: "/video-interieur.MP4",
+    thumbnailPath: "/images/77933ccd-2933-4352-abc1-49108a90b0a4.JPG"
   },
   {
     id: 2,
     title: "Rénovation de façade",
     category: "renovation_exterieure",
     description: "Ravalement complet de façade avec traitement des surfaces et mise en valeur du patrimoine architectural.",
-    videoPath: "/video-exterieur.MP4"
+    videoPath: "/video-exterieur.MP4",
+    thumbnailPath: "/images/2cce1b8c-6cd5-4a02-9e71-89df9c47bd0e.JPG"
   },
   {
     id: 3,
     title: "Rénovation d'ouvrage d'art",
     category: "renovation_exterieure",
     description: "Restauration et rénovation d'un pont historique, démontrant notre expertise en travaux de grande envergure.",
-    videoPath: "/video-exterieur-pont.MP4"
+    videoPath: "/video-exterieur-pont.MP4",
+    thumbnailPath: "/images/2f3b4a80-ae78-497f-92ba-e8456335e102.JPG"
+  }
+];
+
+const imageProjects: ImageProject[] = [
+  {
+    id: 1,
+    title: "Rénovation intérieure",
+    category: "renovation_interieure",
+    imagePath: "/images/77933ccd-2933-4352-abc1-49108a90b0a4.JPG"
+  },
+  {
+    id: 2,
+    title: "Rénovation extérieure",
+    category: "renovation_exterieure",
+    imagePath: "/images/2cce1b8c-6cd5-4a02-9e71-89df9c47bd0e.JPG"
+  },
+  {
+    id: 3,
+    title: "Travaux de finition",
+    category: "renovation_interieure",
+    imagePath: "/images/2f3b4a80-ae78-497f-92ba-e8456335e102.JPG"
+  },
+  {
+    id: 4,
+    title: "Rénovation complète",
+    category: "renovation_interieure",
+    imagePath: "/images/d906a029-a05e-4dbf-989d-ca8273d5883b.JPG"
+  },
+  {
+    id: 5,
+    title: "Rénovation salle de bain",
+    category: "renovation_interieure",
+    imagePath: "/images/5581d116-20c7-4baa-a858-5d69cce313d4.JPG"
+  },
+  {
+    id: 6,
+    title: "Finitions intérieures",
+    category: "renovation_interieure",
+    imagePath: "/images/45ec792b-40d8-4aa7-8320-f8199a8dcc4e.JPG"
   }
 ];
 
@@ -42,11 +93,27 @@ const ProjectMedia = ({ project }: { project: Project }) => {
         className="w-full h-full object-cover"
         controls
         preload="metadata"
-        poster="/images/video-thumbnail.jpg"
+        poster={project.thumbnailPath}
       >
         <source src={project.videoPath} type="video/mp4" />
         Votre navigateur ne supporte pas la lecture de vidéos.
       </video>
+    </div>
+  );
+};
+
+const ImageProjectCard = ({ project }: { project: ImageProject }) => {
+  return (
+    <div className="relative h-96 bg-gray-100 rounded-xl overflow-hidden shadow-lg">
+      <Image
+        src={project.imagePath}
+        alt={project.title}
+        fill
+        className="object-cover"
+      />
+      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+        <h3 className="text-xl font-semibold text-white">{project.title}</h3>
+      </div>
     </div>
   );
 };
@@ -57,6 +124,10 @@ export default function Realisations() {
   const filteredProjects = filter === 'all' 
     ? projects 
     : projects.filter(project => project.category === filter);
+
+  const filteredImageProjects = filter === 'all'
+    ? imageProjects
+    : imageProjects.filter(project => project.category === filter);
 
   const getButtonClass = (buttonFilter: string) => {
     const base = "px-6 py-3 text-base font-medium transition-all duration-200";
@@ -80,7 +151,7 @@ export default function Realisations() {
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-4 text-gray-900">Nos Réalisations</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Découvrez nos travaux de rénovation à travers ces vidéos de chantiers. 
+            Découvrez nos travaux de rénovation à travers ces photos et vidéos de chantiers. 
             Chaque projet illustre notre engagement pour la qualité et notre expertise technique.
           </p>
         </div>
@@ -109,26 +180,39 @@ export default function Realisations() {
           </div>
         </div>
 
-        {/* Grille des projets */}
-        <div className="grid grid-cols-1 gap-12">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
-              <ProjectMedia project={project} />
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">{project.title}</h3>
-                <p className="text-gray-600 text-lg mb-6">{project.description}</p>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors"
-                >
-                  Demander un devis pour un projet similaire
-                  <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
+        {/* Section Photos */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">Notre galerie photo</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredImageProjects.map((project) => (
+              <ImageProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+
+        {/* Section Vidéos */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 text-gray-900">Nos vidéos de chantier</h2>
+          <div className="grid grid-cols-1 gap-12">
+            {filteredProjects.map((project) => (
+              <div key={project.id} className="bg-white rounded-xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
+                <ProjectMedia project={project} />
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{project.title}</h3>
+                  <p className="text-gray-600 text-lg mb-6">{project.description}</p>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center px-6 py-3 bg-orange-600 text-white font-semibold rounded-lg hover:bg-orange-700 transition-colors"
+                  >
+                    Demander un devis pour un projet similaire
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Call to Action */}
