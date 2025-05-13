@@ -65,7 +65,7 @@ export default function Contact() {
               
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Adresse</h3>
+                  <h3 className="text-lg font-medium mb-2 text-gray-900">Adresse</h3>
                   <p className="text-gray-600">
                     181 AVENUE DE VERDUN<br />
                     BATIMENT B - RESIDENCE LES CEDRES<br />
@@ -74,17 +74,17 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Téléphone</h3>
+                  <h3 className="text-lg font-medium mb-2 text-gray-900">Téléphone</h3>
                   <p className="text-gray-600">06 41 39 28 34</p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Email</h3>
+                  <h3 className="text-lg font-medium mb-2 text-gray-900">Email</h3>
                   <p className="text-gray-600">renovationfrance45@gmail.com</p>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Horaires</h3>
+                  <h3 className="text-lg font-medium mb-2 text-gray-900">Horaires</h3>
                   <p className="text-gray-600">
                     Lundi - Vendredi : 8h - 18h<br />
                     Samedi : Sur rendez-vous<br />
@@ -143,7 +143,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="type_projet" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="type_projet" className="block text-sm font-medium text-gray-900 mb-1">
                   Type de projet *
                 </label>
                 <select
