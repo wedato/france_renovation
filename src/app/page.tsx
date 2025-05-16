@@ -200,10 +200,10 @@ export default function Home() {
               Demander un devis
             </Link>
             <a
-              href="tel:0641392834"
+              href="tel:0651392834"
               className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors"
             >
-              06 41 39 28 34
+              06 51 39 28 34
             </a>
           </div>
         </div>

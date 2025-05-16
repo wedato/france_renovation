@@ -94,8 +94,8 @@ const projects: Project[] = [
 const imageProjects: ImageProject[] = [
   {
     id: 1,
-    title: "Rénovation intérieure",
-    category: "renovation_interieure",
+    title: "Rénovation extérieure",
+    category: "renovation_exterieure",
     imagePath: "/images/77933ccd-2933-4352-abc1-49108a90b0a4.JPG"
   },
   {
@@ -118,14 +118,14 @@ const imageProjects: ImageProject[] = [
   },
   {
     id: 5,
-    title: "Rénovation salle de bain",
+    title: "Ravalement de façade",
     category: "renovation_interieure",
     imagePath: "/images/5581d116-20c7-4baa-a858-5d69cce313d4.JPG"
   },
   {
     id: 6,
-    title: "Finitions intérieures",
-    category: "renovation_interieure",
+    title: "Rénovation extérieure",
+    category: "renovation_exterieure",
     imagePath: "/images/45ec792b-40d8-4aa7-8320-f8199a8dcc4e.JPG"
   },
   {
